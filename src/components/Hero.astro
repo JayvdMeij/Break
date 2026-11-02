@@ -1,0 +1,370 @@
+---
+import BreakWordmark from './BreakWordmark.astro';
+import { creed, rulerColumns, site } from '../data/site';
+---
+
+<section id="top" class="hero">
+  <div class="head">
+    <p class="kicker">
+      <span class="dot" aria-hidden="true"></span>
+      {site.kicker}
+    </p>
+
+    <div class="creed">
+      <span class="creed-rule" aria-hidden="true"></span>
+      <p>
+        {creed.map((line, i) => <span class:list={{ accent: i === creed.length - 1 }}>{line}</span>)}
+      </p>
+    </div>
+  </div>
+
+  <div class="ruler" aria-hidden="true">
+    <span>+</span>
+    <span class="ruler-line"></span>
+    {rulerColumns.map((n) => <span>{n}</span>)}
+    <span class="ruler-line"></span>
+    <span>+</span>
+  </div>
+
+  <h1 class="headline">
+    <span class="line-break"><BreakWordmark /></span>
+    <span class="line-grid">THE <span class="accent">GRID.</span></span>
+    <span class="line-rules">
+      <span class="bar" aria-hidden="true"></span>
+      <span class="rules-text">NOT THE RULES.</span>
+    </span>
+  </h1>
+
+  <div class="foot">
+    <div class="foot-left">
+      <div class="note">
+        <span class="note-rule" aria-hidden="true"></span>
+        <p>A strong grid gives creativity something to push against.</p>
+        <p class="motto">{site.motto}</p>
+      </div>
+
+      <ul class="contact">
+        <li>
+          <span class="pip" aria-hidden="true">✆</span>
+          <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
+        </li>
+        <li>
+          <span class="pip" aria-hidden="true">◍</span>
+          <a href={site.url}>{site.website}</a>
+        </li>
+        <li>
+          <span class="pip" aria-hidden="true">✉</span>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="foot-right">
+      <span class="disc" aria-hidden="true"></span>
+      <span class="halftone" aria-hidden="true"></span>
+      <a class="scroll" href="#studio">
+        SCROLL
+        <span class="arrow" aria-hidden="true">↓</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100svh;
+    padding: calc(var(--nav-h) + 2rem) var(--gutter) 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: clamp(2rem, 4vh, 3rem);
+  }
+
+  /* ---- header row ---- */
+
+  .head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 3rem;
+  }
+
+  .kicker {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+  }
+
+  .dot {
+    width: 1.1rem;
+    height: 1.1rem;
+    flex: 0 0 auto;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+  }
+
+  .creed {
+    display: flex;
+    align-items: flex-start;
+    gap: 2.5rem;
+  }
+
+  .creed-rule {
+    width: 14rem;
+    height: 0.7rem;
+    margin-top: 0.4rem;
+    background: var(--ink);
+  }
+
+  .creed p {
+    display: grid;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    line-height: 1.45;
+  }
+
+  .accent {
+    color: var(--accent);
+  }
+
+  /* ---- column ruler ---- */
+
+  .ruler {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--ink-45);
+  }
+
+  .ruler-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(30, 26, 20, 0.35);
+  }
+
+  /* ---- headline ---- */
+
+  .headline {
+    font-family: var(--display);
+    font-weight: 400;
+    line-height: 0.84;
+    letter-spacing: 0.004em;
+  }
+
+  .headline > .line-break,
+  .headline > .line-grid {
+    display: block;
+  }
+
+  .line-break {
+    font-size: clamp(3.4rem, 16.5vw, 16rem);
+    animation: rise 0.9s var(--ease) both;
+  }
+
+  .line-grid {
+    font-size: clamp(2.4rem, 11vw, 10.6rem);
+    animation: rise 0.9s var(--ease) 0.12s both;
+  }
+
+  .headline > .line-rules {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    animation: rise 0.9s var(--ease) 0.24s both;
+  }
+
+  .bar {
+    flex: 0 0 auto;
+    width: 8vw;
+    height: 0.85rem;
+    background: var(--ink);
+  }
+
+  .rules-text {
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: clamp(1.5rem, 6.6vw, 6.4rem);
+    line-height: 0.94;
+    letter-spacing: -0.02em;
+  }
+
+  /* ---- footer row ---- */
+
+  .foot {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .foot-left {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .note {
+    max-width: 20rem;
+  }
+
+  .note-rule {
+    display: block;
+    width: 3.2rem;
+    height: 5px;
+    background: var(--accent);
+  }
+
+  .note p {
+    margin-top: 1rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+
+  .motto {
+    margin-top: 1.4rem;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+  }
+
+  .contact {
+    display: grid;
+    gap: 0.45rem;
+    padding-bottom: 0.2rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .contact li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .contact a {
+    transition: color 0.2s var(--ease);
+  }
+
+  .contact a:hover {
+    color: var(--accent);
+  }
+
+  .pip {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 1.05rem;
+    height: 1.05rem;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--paper);
+    font-size: 0.55rem;
+    line-height: 1;
+  }
+
+  .foot-right {
+    display: flex;
+    align-items: flex-end;
+    gap: 2.5rem;
+  }
+
+  .disc {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .halftone {
+    width: 9rem;
+    height: 4rem;
+    background-image: radial-gradient(var(--ink) 1.1px, transparent 1.2px);
+    background-size: 7px 7px;
+  }
+
+  .scroll {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+  }
+
+  .arrow {
+    animation: bob 1.4s ease-in-out infinite alternate;
+  }
+
+  /* ---- responsive ---- */
+
+  @media (max-width: 60rem) {
+    .head {
+      flex-direction: column;
+      gap: 1.6rem;
+    }
+
+    .creed-rule {
+      width: 8rem;
+    }
+
+    .ruler {
+      gap: 1rem;
+    }
+
+    .ruler span:nth-child(n + 8):nth-child(-n + 12) {
+      display: none;
+    }
+
+    .foot-right {
+      gap: 1.5rem;
+    }
+
+    .disc {
+      width: 4.5rem;
+      height: 4.5rem;
+    }
+
+    .halftone {
+      width: 6rem;
+      height: 3rem;
+    }
+  }
+
+  @media (max-width: 48rem) {
+    .hero {
+      gap: 2rem;
+    }
+
+    .line-rules {
+      gap: 1rem;
+    }
+
+    .bar {
+      width: 15vw;
+      height: 0.5rem;
+    }
+
+    .foot,
+    .foot-left {
+      gap: 1.8rem;
+    }
+
+    .halftone {
+      display: none;
+    }
+  }
+</style>

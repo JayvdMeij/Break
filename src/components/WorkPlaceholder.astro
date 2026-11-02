@@ -1,0 +1,215 @@
+---
+import type { WorkVariant } from '../data/site';
+
+/**
+ * Stand-in artwork for the case studies, built from the poster's own
+ * vocabulary — halftone fields, an orange disc, hairline diagonals,
+ * column rules and debris. Swap a variant for `<Image>` from
+ * `astro:assets` once real photography lands.
+ */
+interface Props {
+  variant: WorkVariant;
+  alt: string;
+}
+
+const { variant, alt } = Astro.props;
+---
+
+<div class:list={['plate', variant]} role="img" aria-label={alt}>
+  {
+    variant === 'mills' && (
+      <>
+        <span class="halftone" />
+        <span class="disc" />
+        <span class="diagonal" />
+        <span class="corner" />
+        <span class="tickmarks" />
+      </>
+    )
+  }
+  {
+    variant === 'orbit' && (
+      <>
+        <span class="panel" />
+        <span class="ring ring-a" />
+        <span class="ring ring-b" />
+        <span class="ring ring-c" />
+        <span class="crossbar" />
+      </>
+    )
+  }
+  {
+    variant === 'format' && (
+      <>
+        <span class="columns" />
+        <span class="block" />
+        <span class="chip chip-a" />
+        <span class="chip chip-b" />
+        <span class="chip chip-c" />
+        <span class="baseline" />
+      </>
+    )
+  }
+</div>
+
+<style>
+  .plate {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--plate);
+    overflow: hidden;
+  }
+
+  .plate > span {
+    position: absolute;
+  }
+
+  /* ---- Kalyan Mills: halftone field cut by a disc ---- */
+
+  .halftone {
+    inset: 12% 8% 12% 6%;
+    background-image: radial-gradient(var(--ink) 1.2px, transparent 1.3px);
+    background-size: 9px 9px;
+    -webkit-mask-image: linear-gradient(115deg, #000 30%, rgba(0, 0, 0, 0.2) 82%, transparent 100%);
+    mask-image: linear-gradient(115deg, #000 30%, rgba(0, 0, 0, 0.2) 82%, transparent 100%);
+  }
+
+  .disc {
+    right: 12%;
+    bottom: 14%;
+    width: 34%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .diagonal {
+    left: -10%;
+    top: 62%;
+    width: 130%;
+    height: 1.3px;
+    background: rgba(30, 26, 20, 0.75);
+    transform: rotate(-27deg);
+    transform-origin: 0 50%;
+  }
+
+  .corner {
+    right: 0;
+    top: 0;
+    width: 26%;
+    height: 30%;
+    background: var(--dark);
+  }
+
+  .tickmarks {
+    left: 8%;
+    bottom: 10%;
+    width: 8%;
+    height: 22%;
+    background-image: repeating-linear-gradient(
+      0deg,
+      rgba(30, 26, 20, 0.55) 0 1.1px,
+      transparent 1.1px 6.4px
+    );
+  }
+
+  /* ---- Orbit Coffee: rings breaking out of a dark panel ---- */
+
+  .panel {
+    inset: 0 42% 0 0;
+    background: var(--dark);
+  }
+
+  .ring {
+    left: 44%;
+    top: 50%;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    transform: translate(-50%, -50%);
+  }
+
+  .ring-a {
+    width: 62%;
+    aspect-ratio: 1;
+  }
+
+  .ring-b {
+    width: 40%;
+    aspect-ratio: 1;
+    border-color: rgba(226, 67, 28, 0.55);
+  }
+
+  .ring-c {
+    width: 18%;
+    aspect-ratio: 1;
+    border: 0;
+    background: var(--accent);
+  }
+
+  .crossbar {
+    left: 0;
+    top: 50%;
+    right: 0;
+    height: 1.2px;
+    background: rgba(243, 240, 233, 0.55);
+  }
+
+  /* ---- Format Quarterly: column rules with debris in the margin ---- */
+
+  /* Two text columns suggested by a run of baseline rules. */
+  .columns {
+    inset: 14% 30% 22% 8%;
+    background-image: repeating-linear-gradient(
+      0deg,
+      rgba(30, 26, 20, 0.62) 0 2px,
+      transparent 2px 13px
+    );
+    -webkit-mask-image: linear-gradient(90deg, #000 0 46%, transparent 46% 54%, #000 54%);
+    mask-image: linear-gradient(90deg, #000 0 46%, transparent 46% 54%, #000 54%);
+  }
+
+  .block {
+    right: 8%;
+    top: 18%;
+    width: 16%;
+    height: 46%;
+    background: var(--accent);
+  }
+
+  .chip {
+    background: var(--ink);
+  }
+
+  .chip-a {
+    right: 4%;
+    top: 66%;
+    width: 7%;
+    height: 12%;
+    clip-path: polygon(0 10%, 66% 0, 100% 64%, 28% 100%);
+  }
+
+  .chip-b {
+    right: 14%;
+    top: 72%;
+    width: 5%;
+    height: 8%;
+    clip-path: polygon(0 26%, 100% 0, 74% 100%);
+  }
+
+  .chip-c {
+    right: 24%;
+    top: 78%;
+    width: 3.5%;
+    height: 5%;
+    clip-path: polygon(0 0, 100% 46%, 42% 100%);
+  }
+
+  .baseline {
+    left: 8%;
+    bottom: 10%;
+    width: 62%;
+    height: 5px;
+    background: var(--ink);
+  }
+</style>

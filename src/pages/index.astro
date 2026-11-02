@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Capabilities from '../components/Capabilities.astro';
+import Clients from '../components/Clients.astro';
+import Contact from '../components/Contact.astro';
+import GridOverlay from '../components/GridOverlay.astro';
+import Hero from '../components/Hero.astro';
+import Marquee from '../components/Marquee.astro';
+import Process from '../components/Process.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Studio from '../components/Studio.astro';
+import Work from '../components/Work.astro';
+---
+
+<BaseLayout>
+  <div class="page">
+    <GridOverlay />
+
+    <SiteNav />
+
+    <main id="main">
+      <Hero />
+      <Marquee />
+      <Studio />
+      <Capabilities />
+      <Work />
+      <Process />
+      <Clients />
+      <Contact />
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    position: relative;
+    overflow-x: clip;
+  }
+</style>

@@ -1,0 +1,112 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import { clients, testimonial } from '../data/site';
+---
+
+<section id="clients" class="clients" aria-label="Clients">
+  <SectionHeader number="05" label="CLIENTS" data-reveal />
+
+  <figure class="quote">
+    <blockquote data-reveal>
+      {testimonial.before}<span class="accent">{testimonial.accent}</span>
+    </blockquote>
+
+    <figcaption data-reveal>
+      <span class="avatar" aria-hidden="true"></span>
+      <span>
+        <span class="author">{testimonial.author}</span>
+        <span class="role">{testimonial.role}</span>
+      </span>
+    </figcaption>
+  </figure>
+
+  <ul class="roster" data-reveal>
+    {clients.map((client) => <li>{client}</li>)}
+  </ul>
+</section>
+
+<style>
+  .clients {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    padding: var(--section-y) var(--gutter);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+    border-bottom: var(--rule);
+    scroll-margin-top: var(--nav-h);
+  }
+
+  .quote {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  blockquote {
+    max-width: 52rem;
+    font-family: var(--display);
+    font-size: clamp(2rem, 5.6vw, 5.6rem);
+    line-height: 1.02;
+    text-wrap: pretty;
+  }
+
+  .accent {
+    color: var(--accent);
+  }
+
+  figcaption {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .avatar {
+    width: 3.2rem;
+    height: 3.2rem;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .author,
+  .role {
+    display: block;
+  }
+
+  .author {
+    font-size: 0.95rem;
+    font-weight: 800;
+  }
+
+  .role {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink-62);
+  }
+
+  .roster {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+    gap: 1.4rem 2rem;
+    border-top: var(--rule);
+    padding-top: 2rem;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--ink-70);
+  }
+
+  @media (max-width: 60rem) {
+    .clients {
+      min-height: 0;
+      gap: 2.2rem;
+    }
+
+    .quote {
+      gap: 2rem;
+    }
+  }
+</style>

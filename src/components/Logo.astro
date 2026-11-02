@@ -1,0 +1,55 @@
+---
+/** The wordmark: Poppins with a knocked-out pennant tucked into the T. */
+interface Props {
+  size?: string;
+  class?: string;
+}
+
+const { size = '1.9rem', class: className } = Astro.props;
+---
+
+<span class:list={['logo', className]} style={`--size:${size}`}>
+  Thegrafx
+  <span class="flag flag-out" aria-hidden="true"></span>
+  <span class="flag flag-in" aria-hidden="true"></span>
+</span>
+
+<style>
+  .logo {
+    position: relative;
+    display: inline-block;
+    font-family: var(--logo);
+    font-weight: 700;
+    font-size: var(--size);
+    letter-spacing: -0.025em;
+    line-height: 1;
+  }
+
+  .flag {
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: calc(var(--size) * 0.368);
+    border-left-style: solid;
+    border-right-style: solid;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-style: solid;
+  }
+
+  .flag-out {
+    left: calc(var(--size) * 0.368);
+    border-left-width: calc(var(--size) * 0.21);
+    border-right-width: calc(var(--size) * 0.21);
+    border-top-width: calc(var(--size) * 0.526);
+    border-top-color: var(--paper);
+  }
+
+  .flag-in {
+    left: calc(var(--size) * 0.474);
+    border-left-width: calc(var(--size) * 0.116);
+    border-right-width: calc(var(--size) * 0.116);
+    border-top-width: calc(var(--size) * 0.316);
+    border-top-color: currentColor;
+  }
+</style>

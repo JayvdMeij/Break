@@ -1,0 +1,184 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import WorkPlaceholder from './WorkPlaceholder.astro';
+import { work } from '../data/site';
+
+const [lead, ...rest] = work;
+---
+
+<section id="work" class="work">
+  <div class="head" data-reveal>
+    <div>
+      <SectionHeader number="03" label="SELECTED WORK" />
+      <h2 class="title">RECENT PROJECTS</h2>
+    </div>
+    <a class="index" href="#contact">FULL INDEX →</a>
+  </div>
+
+  <div class="grid">
+    <figure class="project lead" data-reveal>
+      <div class="frame">
+        <WorkPlaceholder variant={lead.variant} alt={lead.alt} />
+      </div>
+      <figcaption>
+        <h3>{lead.title}</h3>
+        <span class="meta">{lead.meta}</span>
+      </figcaption>
+    </figure>
+
+    <div class="stack">
+      {
+        rest.map((project) => (
+          <figure class="project" data-reveal>
+            <div class="frame">
+              <WorkPlaceholder variant={project.variant} alt={project.alt} />
+            </div>
+            <figcaption>
+              <h3>{project.title}</h3>
+              <span class="meta">{project.meta}</span>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .work {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    padding: var(--section-y) var(--gutter);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2.5rem;
+    border-bottom: var(--rule);
+    scroll-margin-top: var(--nav-h);
+  }
+
+  .head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .title {
+    margin-top: 1.2rem;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(2.4rem, 7vw, 7rem);
+    line-height: 0.9;
+  }
+
+  .index {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 0.35rem;
+    transition: color 0.2s var(--ease);
+  }
+
+  .index:hover {
+    color: var(--accent);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .stack {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .project {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .frame {
+    position: relative;
+    flex: 1;
+    min-height: 9rem;
+    overflow: hidden;
+  }
+
+  .lead {
+    gap: 1rem;
+  }
+
+  .lead .frame {
+    flex: 0 0 auto;
+    height: 46vh;
+    min-height: 20rem;
+  }
+
+  figcaption {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: var(--rule);
+    padding-top: 0.7rem;
+  }
+
+  figcaption h3 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+
+  .lead figcaption {
+    padding-top: 0.8rem;
+  }
+
+  .lead figcaption h3 {
+    font-size: clamp(1.6rem, 3vw, 2.8rem);
+  }
+
+  .meta {
+    flex: 0 0 auto;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--ink-62);
+  }
+
+  .lead .meta {
+    font-size: 0.7rem;
+  }
+
+  @media (max-width: 60rem) {
+    .work {
+      min-height: 0;
+    }
+
+    .grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stack {
+      grid-template-rows: none;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+    }
+
+    .lead .frame {
+      height: 38vh;
+      min-height: 16rem;
+    }
+
+    .frame {
+      min-height: 14rem;
+    }
+  }
+</style>

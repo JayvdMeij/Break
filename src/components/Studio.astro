@@ -1,0 +1,96 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import { stats, studioParagraphs } from '../data/site';
+---
+
+<section id="studio" class="studio">
+  <SectionHeader number="01" label="STUDIO" data-reveal />
+
+  <h2 class="title" data-reveal>
+    A GRID IS A PROMISE.<br />WE KEEP IT, <span class="accent">THEN BEND IT.</span>
+  </h2>
+
+  <div class="body">
+    {studioParagraphs.map((text) => <p class="lede" data-reveal>{text}</p>)}
+
+    <dl class="stats" data-reveal>
+      {
+        stats.map((stat) => (
+          <div class="stat">
+            <dd class="value">{stat.value}</dd>
+            <dt class="label">{stat.label}</dt>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  .studio {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    padding: var(--section-y) var(--gutter);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3.5rem;
+    border-bottom: var(--rule);
+    scroll-margin-top: var(--nav-h);
+  }
+
+  .title {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(2.6rem, 10.5vw, 11rem);
+    line-height: 0.88;
+    letter-spacing: 0.004em;
+  }
+
+  .accent {
+    color: var(--accent);
+  }
+
+  .body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 3rem 4rem;
+    border-top: var(--rule);
+    padding-top: 2.5rem;
+  }
+
+  .lede {
+    max-width: 34rem;
+    font-size: 1.15rem;
+    line-height: 1.55;
+  }
+
+  .stats {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .value {
+    margin: 0;
+    font-family: var(--display);
+    font-size: clamp(3rem, 6vw, 4.2rem);
+    line-height: 0.9;
+  }
+
+  .label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    color: var(--ink-62);
+  }
+
+  @media (max-width: 60rem) {
+    .studio {
+      min-height: 0;
+      gap: 2.5rem;
+    }
+  }
+</style>

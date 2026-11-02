@@ -1,0 +1,200 @@
+---
+import Logo from './Logo.astro';
+import { navLinks } from '../data/site';
+---
+
+<header class="masthead" data-nav>
+  <div class="bar">
+    <a class="brand" href="#top">
+      <Logo />
+      <span class="sr-only">Thegrafx — back to top</span>
+    </a>
+
+    <nav class="links" aria-label="Primary">
+      {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+      <a class="cta" href="#contact">START A PROJECT</a>
+    </nav>
+
+    <button class="burger" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+      <span class="sr-only">Menu</span>
+      <span class="burger-lines" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+  </div>
+
+  <div class="progress" data-progress aria-hidden="true"></div>
+
+  <nav id="mobile-menu" class="overlay" aria-label="Mobile" data-menu>
+    <ul>
+      {navLinks.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+      <li><a class="cta" href="#contact">START A PROJECT</a></li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .masthead {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 60;
+    transition:
+      background 0.35s var(--ease),
+      box-shadow 0.35s var(--ease);
+  }
+
+  .masthead[data-scrolled] {
+    background: rgba(243, 240, 233, 0.92);
+    box-shadow: 0 1px 0 rgba(30, 26, 20, 0.22);
+    backdrop-filter: blur(10px);
+  }
+
+  /* The overlay starts below the bar, so the bar has to carry paper too. */
+  .masthead:has([data-menu][data-open]) {
+    background: var(--paper);
+    box-shadow: none;
+  }
+
+  .bar {
+    height: var(--nav-h);
+    padding: 0 var(--gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+  }
+
+  .links {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.2rem, 2.4vw, 2.4rem);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+  }
+
+  .links a {
+    transition: color 0.2s var(--ease);
+  }
+
+  .links a:not(.cta):hover {
+    color: var(--accent);
+  }
+
+  .cta {
+    background: var(--accent);
+    color: var(--paper);
+    padding: 0.9rem 1.4rem;
+    transition: background 0.25s var(--ease);
+  }
+
+  .cta:hover {
+    background: var(--ink);
+  }
+
+  .progress {
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+  }
+
+  .burger {
+    display: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    margin-right: -0.75rem;
+  }
+
+  .burger-lines {
+    display: grid;
+    gap: 5px;
+    width: 1.5rem;
+  }
+
+  .burger-lines i {
+    display: block;
+    height: 2.5px;
+    background: var(--ink);
+    transition: transform 0.3s var(--ease), opacity 0.2s var(--ease);
+  }
+
+  .burger[aria-expanded='true'] i:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+  }
+
+  .burger[aria-expanded='true'] i:nth-child(2) {
+    opacity: 0;
+  }
+
+  .burger[aria-expanded='true'] i:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+  }
+
+  .overlay {
+    display: none;
+  }
+
+  @media (max-width: 60rem) {
+    .links {
+      display: none;
+    }
+
+    .burger {
+      display: grid;
+    }
+
+    .overlay {
+      display: block;
+      position: fixed;
+      inset: var(--nav-h) 0 0;
+      background: var(--paper);
+      padding: var(--gutter);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-1rem);
+      transition:
+        opacity 0.3s var(--ease),
+        transform 0.3s var(--ease),
+        visibility 0.3s;
+    }
+
+    .overlay[data-open] {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+
+    .overlay ul {
+      display: grid;
+      gap: 1.4rem;
+      font-family: var(--display);
+      font-size: clamp(2rem, 9vw, 3.2rem);
+      line-height: 1;
+    }
+
+    .overlay .cta {
+      display: inline-block;
+      margin-top: 1rem;
+      font-family: var(--body);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+    }
+  }
+</style>

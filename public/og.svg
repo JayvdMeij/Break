@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#f3f0e9"/>
+  <g fill="none" stroke="rgba(196,74,42,0.30)" stroke-width="1.5">
+    <path d="M64 0V630M200 0V630M336 0V630M472 0V630M608 0V630M744 0V630M880 0V630M1016 0V630M1152 0V630"/>
+  </g>
+  <g font-family="Impact, Haettenschweiler, sans-serif" fill="#17150f">
+    <text x="64" y="300" font-size="220" letter-spacing="2">BREAK</text>
+    <text x="64" y="440" font-size="150">THE <tspan fill="#e2431c">GRID.</tspan></text>
+  </g>
+  <rect x="64" y="480" width="120" height="12" fill="#17150f"/>
+  <text x="200" y="496" font-family="Helvetica, Arial, sans-serif" font-size="60" font-weight="bold" fill="#17150f" letter-spacing="-1">NOT THE RULES.</text>
+  <text x="64" y="570" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2431c" letter-spacing="3">THEGRAFX — GRID / ALIGNMENT / RHYTHM</text>
+  <circle cx="1060" cy="540" r="55" fill="#e2431c"/>
+</svg>

@@ -1,0 +1,61 @@
+---
+import Logo from './Logo.astro';
+import { navLinks, site } from '../data/site';
+---
+
+<footer class="footer">
+  <div class="brand">
+    <Logo size="1.2rem" />
+    <span>{site.motto}</span>
+  </div>
+
+  <nav class="links" aria-label="Footer">
+    {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+  </nav>
+
+  <p class="copyright">© {new Date().getFullYear()} THEGRAFX</p>
+</footer>
+
+<style>
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.6rem 2rem;
+    flex-wrap: wrap;
+    border-top: var(--rule);
+    padding-top: 1.6rem;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--ink-62);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    color: var(--ink-62);
+  }
+
+  .brand :global(.logo) {
+    color: var(--ink);
+  }
+
+  .links {
+    display: flex;
+    gap: 1.6rem;
+  }
+
+  .links a {
+    transition: color 0.2s var(--ease);
+  }
+
+  .links a:hover {
+    color: var(--accent);
+  }
+
+  .copyright {
+    margin: 0;
+  }
+</style>

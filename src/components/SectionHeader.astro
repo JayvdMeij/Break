@@ -1,0 +1,35 @@
+---
+/** The `— 01 / STUDIO` eyebrow that opens every section. */
+interface Props {
+  number: string;
+  label: string;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { number, label, class: className, ...rest } = Astro.props;
+---
+
+<p class:list={['eyebrow', className]} {...rest}>
+  <span class="tick" aria-hidden="true"></span>
+  <span>{number} / {label}</span>
+</p>
+
+<style>
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+  }
+
+  .tick {
+    width: 2.5rem;
+    height: 5px;
+    flex: 0 0 auto;
+    background: var(--accent);
+  }
+</style>

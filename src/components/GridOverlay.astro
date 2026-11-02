@@ -1,0 +1,49 @@
+---
+/**
+ * The column measure that sits behind the page: a wide accent rule every
+ * `--col-major`, a faint one every `--col-minor`, both offset by the
+ * gutter so the ruler lines up with the type.
+ */
+interface Props {
+  tone?: 'light' | 'dark';
+  /** Set when the overlay paints a section rather than the whole page. */
+  contained?: boolean;
+}
+
+const { tone = 'light', contained = false } = Astro.props;
+---
+
+<div class:list={['grid-overlay', tone, { contained }]} aria-hidden="true"></div>
+
+<style>
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        var(--major) 0 1.5px,
+        transparent 1.5px var(--col-major)
+      ),
+      repeating-linear-gradient(90deg, var(--minor) 0 1px, transparent 1px var(--col-minor));
+    background-position:
+      var(--gutter) 0,
+      var(--gutter) 0;
+  }
+
+  .light {
+    --major: rgba(196, 74, 42, 0.3);
+    --minor: rgba(30, 26, 20, 0.08);
+  }
+
+  .dark {
+    --major: rgba(226, 67, 28, 0.35);
+    --minor: rgba(243, 240, 233, 0.09);
+  }
+
+  .contained {
+    z-index: 0;
+  }
+</style>

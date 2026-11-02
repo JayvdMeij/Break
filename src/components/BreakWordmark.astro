@@ -1,0 +1,86 @@
+---
+import { cracks, cutShards, flyingShards } from '../data/site';
+---
+
+<span class="wordmark">
+  BREAK
+  <span class="decor" aria-hidden="true">
+    {
+      cutShards.map((s) => (
+        <span
+          class="cut"
+          style={`left:${s.left}%;top:${s.top}%;width:${s.width}%;height:${s.height}%;clip-path:polygon(${s.clip})`}
+        />
+      ))
+    }
+    {
+      cracks.map((c) => (
+        <span
+          class="crack"
+          style={`left:${c.left}%;top:${c.top}%;width:${c.width}%;height:${c.height}%;transform:rotate(${c.rotate}deg)`}
+        />
+      ))
+    }
+    <span class="shatter" data-shatter>
+      {
+        flyingShards.map((s) => (
+          <span
+            class="shard"
+            style={`left:${s.left}%;top:${s.top}%;width:${s.width}%;height:${s.height}%;clip-path:polygon(${s.clip});animation-duration:${s.dur}s;animation-delay:${s.delay}s`}
+          />
+        ))
+      }
+    </span>
+  </span>
+</span>
+
+<style>
+  .wordmark {
+    position: relative;
+    display: inline-block;
+  }
+
+  .decor {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .cut,
+  .crack,
+  .shard {
+    position: absolute;
+  }
+
+  /* Paper-coloured wedges knock chunks out of the letterform. */
+  .cut,
+  .crack {
+    background: var(--paper);
+  }
+
+  .crack {
+    transform-origin: 0 0;
+  }
+
+  .shatter {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .shard {
+    background: var(--ink);
+    animation-name: drift;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+
+  /* Below the breakpoint the debris field falls outside the viewport, so
+     only the carved letterform survives. */
+  @media (max-width: 48rem) {
+    .shatter {
+      display: none;
+    }
+  }
+</style>
